@@ -25,6 +25,7 @@ import com.example.duanandroid.Sql.Sqlite;
 import com.example.duanandroid.Sql.PetSql;
 import com.example.duanandroid.UpdatePetAct;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +111,7 @@ public class RecyclerViewQlyPet extends RecyclerView.Adapter<RecyclerViewQlyPet.
                 TextView tvMoTa = view.findViewById(R.id.tvMoTaPetThongTin);
                 ImageView imageView = view.findViewById(R.id.imgPetThongTin);
 
+                DecimalFormat formatter = new DecimalFormat("###,###,###,###");
                 byte[] anh = petList.get(position).getAnh();
                 Bitmap bitmap = BitmapFactory.decodeByteArray(anh, 0, anh.length);
                 imageView.setImageBitmap(bitmap);
@@ -119,7 +121,7 @@ public class RecyclerViewQlyPet extends RecyclerView.Adapter<RecyclerViewQlyPet.
                 tvTuoi.setText("Tuổi: " + petList.get(position).getTuoi() + " tháng");
                 tvGioiTinh.setText("Giới tính: " + petList.get(position).getGioiTinh());
                 tvNgay.setText("Ngày nhập: " + simpleDateFormat.format(petList.get(position).getNgayNhap()));
-                tvGia.setText("Giá: " + Integer.toString(petList.get(position).getGiaTien()) + " VNĐ");
+                tvGia.setText("Giá: " + formatter.format(petList.get(position).getGiaTien()) + " VNĐ");
                 tvMoTa.setText("Mô tả: " + petList.get(position).getMoTa());
                 builder.setPositiveButton("Sửa", new DialogInterface.OnClickListener() {
                     @Override

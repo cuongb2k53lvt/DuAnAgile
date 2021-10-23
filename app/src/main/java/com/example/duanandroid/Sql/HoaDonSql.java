@@ -111,9 +111,9 @@ public class HoaDonSql {
         return tongtien;
     }
 
-    public double LayDoanhThuTheoThang(String thang) {
+    public int LayDoanhThuTheoThang(String thang) {
         SQLiteDatabase sqLiteDatabase = sqlite.getReadableDatabase();
-        double doanhthu = 0;
+        int doanhthu = 0;
 //        String select_doanhthu = "SELECT SUM(giatien) FROM vatnuoi " +
 //                "INNER JOIN hoadonct ON vatnuoi.mavatnuoi=hoadonct.mavatnuoi " +
 //                "INNER JOIN hoadon ON hoadon.mahoadon=hoadonct.mahd WHERE strftime('%m',hoadon.ngaymua)=?";
@@ -121,7 +121,7 @@ public class HoaDonSql {
         Cursor cursor = sqLiteDatabase.rawQuery(select_doanhthu, new String[]{thang});
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
-            doanhthu = cursor.getDouble(0);
+            doanhthu = cursor.getInt(0);
         }
         cursor.close();
         return doanhthu;

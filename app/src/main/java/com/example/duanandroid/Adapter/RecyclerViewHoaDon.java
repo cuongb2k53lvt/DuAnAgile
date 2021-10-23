@@ -15,6 +15,7 @@ import com.example.duanandroid.R;
 import com.example.duanandroid.Sql.HoaDonSql;
 import com.example.duanandroid.Sql.Sqlite;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,8 +44,10 @@ public class RecyclerViewHoaDon extends RecyclerView.Adapter<RecyclerViewHoaDon.
     @Override
     public void onBindViewHolder(@NonNull HoaDonViewHolder holder, int position) {
         HoaDonSql hoaDonSql = new HoaDonSql(sqlite);
+        DecimalFormat formatter = new DecimalFormat("###,###,###,###");
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        holder.tvTongTien.setText("Tổng tiền: " + hoaDonSql.LayTongTien(hoaDonList.get(position).getMaHoaDon()) + " VNĐ");
+        holder.tvTongTien.setText("Tổng tiền: " + formatter.format(hoaDonSql.LayTongTien(hoaDonList.get(position).getMaHoaDon())) + " VNĐ");
         holder.tvMaHoaDon.setText("Mã hóa đơn: " + hoaDonList.get(position).getMaHoaDon());
         holder.tvKhachHang.setText("Mã khách hàng: " + hoaDonList.get(position).getMaKh());
         holder.tvNhanVien.setText("Tên nhân viên: " + hoaDonList.get(position).getTenTk());

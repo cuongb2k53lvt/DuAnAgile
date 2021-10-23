@@ -216,4 +216,18 @@ public class PetSql {
         sqLiteStatement.bindString(9, mapet);
         sqLiteStatement.execute();
     }
+     public int LayDoanhThuTheoPet(String loai, String thang){
+        SQLiteDatabase sqLiteDatabase = sqlite.getReadableDatabase();
+        int tongTien = 0;
+        String select = "SELECT SUM(giatien) FROM pet "+
+                "INNER JOIN hoadonct ON pet.mapet = hoadonct.mapet "+
+                "INNER JOIN hoadon ON hoadon.mahoadon = hoadonct.mahd WHERE tenloai = ? AND strftime('%m',hoadon.ngaymua) = ?";
+        Cursor cursor = sqLiteDatabase.rawQuery(select,new String[]{loai, thang});
+        if(cursor.getCount()>0){
+            cursor.moveToFirst();
+            tongTien = cursor.getInt(0);
+        }
+        cursor.close();
+        return tongTien;
+     }
 }

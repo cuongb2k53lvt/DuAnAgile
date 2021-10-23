@@ -89,7 +89,6 @@ public class ThemPetActivity extends AppCompatActivity {
                     tienPet = Integer.parseInt(edtGiatien.getText().toString());
                     String tien = formatter.format(Integer.parseInt(edtGiatien.getText().toString()))+" VNĐ";
                     edtGiatien.setText(tien);
-                    Toast.makeText(ThemPetActivity.this, ""+tienPet, Toast.LENGTH_SHORT).show();
                 }
             }
         });

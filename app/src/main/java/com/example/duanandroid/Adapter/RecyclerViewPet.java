@@ -21,6 +21,7 @@ import com.example.duanandroid.R;
 import com.example.duanandroid.ThemKhachHangActivity;
 import com.ramotion.foldingcell.FoldingCell;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,13 +64,14 @@ public class RecyclerViewPet extends RecyclerView.Adapter<RecyclerViewPet.ChoVie
             holder.tvGioiTinh.setText("Giới tính: " + pet.getGioiTinh());
 
             //thông tin All
+            DecimalFormat formatter = new DecimalFormat("###,###,###,###");
             holder.imageView.setImageBitmap(bitmap);
             holder.tvMa.setText(petList.get(i).getMaPet());
             holder.tvTen.setText("Giống: " + petList.get(i).getTenPet());
             holder.tvTuoi.setText("Tuổi: " + petList.get(i).getTuoi() + " tháng");
             holder.tvGioiTinh1.setText("Giới tính: " + petList.get(i).getGioiTinh());
             holder.tvNgay.setText("Ngày nhập: " + simpleDateFormat.format(petList.get(i).getNgayNhap()));
-            holder.tvGia.setText("Giá: " + petList.get(i).getGiaTien() + " VNĐ");
+            holder.tvGia.setText("Giá: " + formatter.format(petList.get(i).getGiaTien()) + " VNĐ");
             holder.tvMoTa.setText("Mô tả: " + petList.get(i).getMoTa());
         }
 
