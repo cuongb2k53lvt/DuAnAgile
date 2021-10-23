@@ -50,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
         nhanVienSql = new NhanVienSql(sqlite);
         arrNhanVien = nhanVienSql.getAllNhanVien();
 
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(uiOptions);
         int k = 0;
         for (int i = 0; i < arrNhanVien.size(); i++) {
             if (arrNhanVien.get(i).getTenTaiKhoan().equalsIgnoreCase("admin")) {
@@ -155,5 +159,11 @@ public class MainActivity extends AppCompatActivity {
             Boolean check = sharedPreferences.getBoolean("checkbox", false);
             cbLuuMatKhau.setChecked(check);
         }
+    }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
     }
 }

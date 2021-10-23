@@ -74,6 +74,11 @@ public class UpdatePetAct extends AppCompatActivity {
         imgNgay = findViewById(R.id.imgUpdateNgayNhapPet);
         spLoaiPet = findViewById(R.id.spLoaiPetUpdate);
 
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(uiOptions);
+
         List<String> listLoaiPet = new ArrayList<>();
         listLoaiPet.add("Chó");
         listLoaiPet.add("Mèo");

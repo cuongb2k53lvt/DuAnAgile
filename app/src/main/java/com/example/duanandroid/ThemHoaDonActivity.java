@@ -49,6 +49,12 @@ public class ThemHoaDonActivity extends AppCompatActivity {
         edNgayMua.setEnabled(false);
         edtTentk.setEnabled(false);
         edtMaKh.setEnabled(false);
+
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(uiOptions);
+
         imgThemNgayMua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

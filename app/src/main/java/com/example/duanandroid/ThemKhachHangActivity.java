@@ -31,6 +31,11 @@ public class ThemKhachHangActivity extends AppCompatActivity {
         tilMaKhachHang = findViewById(R.id.tilMaKhachHang);
         tilTenKhachHang = findViewById(R.id.tilTenKhachHang);
         tilSoDienThoai = findViewById(R.id.tilSoDienThoai);
+
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 
     public void ThemHoaDon(View view) {

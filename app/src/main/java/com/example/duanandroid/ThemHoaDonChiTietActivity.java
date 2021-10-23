@@ -53,6 +53,12 @@ public class ThemHoaDonChiTietActivity extends AppCompatActivity {
         setContentView(R.layout.activity_them_hoa_don_chi_tiet);
         tvTongTien = findViewById(R.id.tvTongTien);
         rvThanhToan = findViewById(R.id.rvThanhToan);
+
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(uiOptions);
+
         String mavatnuoi = getIntent().getExtras().getString("MAVATNUOI");
         mahoadon = getIntent().getExtras().getString("MAHOADON");
         sqlite = new Sqlite(ThemHoaDonChiTietActivity.this);

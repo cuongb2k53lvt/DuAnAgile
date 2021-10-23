@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +26,12 @@ public class SplashActivity extends AppCompatActivity {
         textView.setTypeface(Typeface.createFromAsset(getAssets(), "Pacifico.ttf"));
         backGr = findViewById(R.id.imageView2);
         lottieAnimationView = findViewById(R.id.LottieAnimationView);
+
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(uiOptions);
+
         backGr.animate().translationY(-3600).setDuration(1000).setStartDelay(4000);
         textView.animate().translationY(1400).setDuration(1000).setStartDelay(4000);
         lottieAnimationView.animate().translationY(1600).setDuration(1000).setStartDelay(4000);
