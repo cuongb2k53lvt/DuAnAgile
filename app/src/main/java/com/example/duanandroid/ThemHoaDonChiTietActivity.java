@@ -32,6 +32,7 @@ import com.example.duanandroid.Sql.KhachHangSql;
 import com.example.duanandroid.Sql.Sqlite;
 import com.example.duanandroid.Sql.PetSql;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,8 +69,9 @@ public class ThemHoaDonChiTietActivity extends AppCompatActivity {
         hoaDonCtSql.ThemHdct(hdct);
         arrHdct = new ArrayList<>();
         arrHdct.add(hdct);
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
         try {
-            tvTongTien.setText("Tổng tiền: " + petSql.LayPetTheoMa(hdct.getMaPet()).getGiaTien()+" VNĐ");
+            tvTongTien.setText("Tổng tiền: " + decimalFormat.format(petSql.LayPetTheoMa(hdct.getMaPet()).getGiaTien())+" VNĐ");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -180,6 +182,7 @@ public class ThemHoaDonChiTietActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        //Lấy tất cả mã pet chưa được chọn
         for (int i = 0; i < arrMaVatNuoi.size(); i++) {
             for (int j = 0; j < arrMaVnSelected.size(); j++) {
                 if (arrMaVatNuoi.get(i).equalsIgnoreCase(arrMaVnSelected.get(j))) {
@@ -194,6 +197,7 @@ public class ThemHoaDonChiTietActivity extends AppCompatActivity {
 
         ArrayList<Pet> arrVnUnselected = new ArrayList<>();
         ArrayList<Pet> arrThemPet = new ArrayList<>();
+        //Lấy tất cả pet chưa được chọn
         for (int i = 0; i < arrMaVnUnselected.size(); i++) {
             Pet pet = new Pet();
             try {
@@ -203,6 +207,7 @@ public class ThemHoaDonChiTietActivity extends AppCompatActivity {
             }
             arrVnUnselected.add(pet);
         }
+        //Lấy tất cả pet ở trạng thái chưa bán
         for (int i = 0; i < arrVnUnselected.size(); i++) {
             if (arrVnUnselected.get(i).getTrangThai().equalsIgnoreCase("Chưa bán")) {
                 arrThemPet.add(arrVnUnselected.get(i));
@@ -210,6 +215,7 @@ public class ThemHoaDonChiTietActivity extends AppCompatActivity {
         }
 
         if (arrThemPet.size() != 0) {
+            //Hiện dialog pet chưa bán và chưa chọn
             RecyclerViewPet recyclerHdct = new RecyclerViewPet(arrThemPet, "thanhtoan");
             recyclerView.setAdapter(recyclerHdct);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ThemHoaDonChiTietActivity.this, RecyclerView.VERTICAL, false);
@@ -232,7 +238,10 @@ public class ThemHoaDonChiTietActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-                    tvTongTien.setText("Tổng tiền: " + tongtien +" VNĐ");
+                    DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
+                    String tien = decimalFormat.format(tongtien) + " VNĐ";
+                    tvTongTien.setText("Tổng tiền: " + tien);
+                    //reset lại recycle view
                     RecyclerViewThanhToan recyclerViewThanhToan = new RecyclerViewThanhToan(arrHdct);
                     rvThanhToan.setAdapter(recyclerViewThanhToan);
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ThemHoaDonChiTietActivity.this, RecyclerView.VERTICAL, false);

@@ -89,11 +89,16 @@ public class ThemPetActivity extends AppCompatActivity {
         edtGiatien.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus==true){
+                    edtGiatien.setText("");
+                }
                 if(hasFocus==false){
-                    DecimalFormat formatter = new DecimalFormat("###,###,###,###");
-                    tienPet = Integer.parseInt(edtGiatien.getText().toString());
-                    String tien = formatter.format(Integer.parseInt(edtGiatien.getText().toString()))+" VNĐ";
-                    edtGiatien.setText(tien);
+                    if(!edtGiatien.getText().toString().isEmpty()){
+                        DecimalFormat formatter = new DecimalFormat("###,###,###,###");
+                        tienPet = Integer.parseInt(edtGiatien.getText().toString());
+                        String tien = formatter.format(Integer.parseInt(edtGiatien.getText().toString()))+" VNĐ";
+                        edtGiatien.setText(tien);
+                    }
                 }
             }
         });

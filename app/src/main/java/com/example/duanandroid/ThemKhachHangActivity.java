@@ -68,7 +68,6 @@ public class ThemKhachHangActivity extends AppCompatActivity {
 
     public int validate() {
         Pattern special = Pattern.compile("[!@#$%&^*()_+=|<>?{}\\[\\]~-]");
-        Pattern maKh = Pattern.compile("KH");
         int check = 1;
         boolean checkMaKh = true;
         Sqlite sqlite = new Sqlite(ThemKhachHangActivity.this);

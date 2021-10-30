@@ -30,6 +30,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class UpdatePetAct extends AppCompatActivity {
     Sqlite sqlite;
     int loaiIndex = 0;
     int gioiTinhIndex = 0;
+    int tienPet = 0;
     PetSql petSql;
     List<Pet> pets;
     @Override
@@ -94,6 +96,24 @@ public class UpdatePetAct extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        edtGiatien.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus==true){
+                    edtGiatien.setText("");
+                }
+                if(hasFocus==false){
+                    if(!edtGiatien.getText().toString().isEmpty()){
+                        DecimalFormat formatter = new DecimalFormat("###,###,###,###");
+                        tienPet = Integer.parseInt(edtGiatien.getText().toString());
+                        String tien = formatter.format(Integer.parseInt(edtGiatien.getText().toString()))+" VNĐ";
+                        edtGiatien.setText(tien);
+                    }
+                }
+            }
+        });
+
         String maPet = getIntent().getExtras().getString("MAPETUPDATE");
         edtMaPet.setText(maPet);
         String loaiPet = getIntent().getExtras().getString("LOAIPETUPDATE");
@@ -103,11 +123,13 @@ public class UpdatePetAct extends AppCompatActivity {
         String ngayNhap = getIntent().getExtras().getString("NGAYNHAPUPDATE");
         int giaTien = getIntent().getExtras().getInt("GIATIENUPDATE");
         String moTa = getIntent().getExtras().getString("MOTAUPDATE");
-
+        tienPet = giaTien;
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
+        String tien = decimalFormat.format(giaTien)+ " VNĐ";
         tilGiong.getEditText().setText(giongPet);
         tilTuoi.getEditText().setText(tuoiPet);
         edtNgayNhap.setText(ngayNhap);
-        edtGiatien.setText(Integer.toString(giaTien));
+        edtGiatien.setText(tien);
         edtMota.setText(moTa);
 
         for(int i =0; i<listLoaiPet.size();i++){
@@ -200,7 +222,7 @@ public class UpdatePetAct extends AppCompatActivity {
         String giaTien = edtGiatien.getText().toString();
 
         if (validate() > 0) {
-            petSql.UpdatePet(maPet, tenPet, loai, gioiTinh, tuoi, moTa, anh, simpleDateFormat.parse(date), Integer.valueOf(giaTien));
+            petSql.UpdatePet(maPet, tenPet, loai, gioiTinh, tuoi, moTa, anh, simpleDateFormat.parse(date), tienPet);
             Toast.makeText(UpdatePetAct.this, "Update thành công", Toast.LENGTH_SHORT).show();
             finish();
         } else {
